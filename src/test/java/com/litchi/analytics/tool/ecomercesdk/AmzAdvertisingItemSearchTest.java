@@ -19,7 +19,7 @@ import java.math.BigInteger;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class AmzAdvertisingClientTest {
+public class AmzAdvertisingItemSearchTest {
     private static AmzAdvertisingClient amzClient;
     private static AmzAdvertisingQueryPreparer preparer;
 
