@@ -3,7 +3,7 @@ package com.litchi.analytics.tool.amazon.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "AmzKeywords")
+@Table(name = "amz_keywords")
 public class AmzKeywordEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
