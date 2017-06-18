@@ -11,11 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AmzCategoryService {
-
-
-
-
-    public void recursivelyFindSubCategoris(String browseNodeId){
+    public void buildCategoryRelationMap(){
 
     }
 
