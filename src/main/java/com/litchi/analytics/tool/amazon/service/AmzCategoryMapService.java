@@ -19,6 +19,7 @@ public class AmzCategoryMapService {
     @Autowired
     private AmzCategoryService categoryService;
     private Map<String,AmzBrowseNode> topNodes = new HashMap<>();
+    private Set<String> duplicateSet = new HashSet<>();
 
 
 
@@ -37,15 +38,20 @@ public class AmzCategoryMapService {
 
 
 
-    private void buildCategoryRelationMap(){
+    public void buildCategoryRelationMap(){
         topNodes.forEach((k,v)->{
-            String browseId = k;
             AmzBrowseNode node = v;
             doBuildRelationship(node);
         });
     }
 
-    public void doBuildRelationship(AmzBrowseNode node) {
+    private void doBuildRelationship(AmzBrowseNode node) {
+        if (duplicateSet.contains(node.getBrowseId())) {
+            return;
+        }
+        duplicateSet.add(node.getBrowseId());
+
+
         List<AmzBrowseNode> children = categoryService.saveCategoryAndChildren(node.getBrowseId());
         children.forEach(c->doBuildRelationship(c));
     }
