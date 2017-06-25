@@ -1,6 +1,5 @@
 package com.litchi.analytics.tool.amazon.service;
 
-import com.leechi.vendorclient.amzMarket.AmzMarketOrderClientBuilder;
 import com.litchi.analytics.tool.amazon.entity.AmzCategoryEntity;
 import com.litchi.analytics.tool.amazon.help.BrowseNodeHelp;
 import com.litchi.analytics.tool.amazon.model.AmzBrowseNode;
@@ -26,6 +25,7 @@ public class AmzCategoryService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<AmzBrowseNode> saveCategoryAndChildren(String browseNodeId){
         List<AmzBrowseNode> children = new ArrayList<>();
+        sleepInSeconds(10);
         AmzBrowseNode node = BrowseNodeHelp.getBrowseNode(browseNodeId, children);
         saveCategoryAndChildrenRelationShip(node, children);
         return children;
@@ -49,5 +49,12 @@ public class AmzCategoryService {
 
         categoryRepo.save(parent);
 
+    }
+
+    private void sleepInSeconds(int n){
+        try {
+            Thread.sleep(1000*n);
+        }catch (Exception ex) {
+        }
     }
 }
