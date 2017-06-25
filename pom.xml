@@ -84,4 +84,12 @@
 	</build>
 
 
+	<repositories>
+		<repository>
+			<id>github</id>
+			<name> github </name>
+			<url>https://github.com/wenhao888/MavenRepo</url>
+		</repository>
+	</repositories>
+
 </project>
