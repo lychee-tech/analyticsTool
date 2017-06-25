@@ -17,8 +17,8 @@ import java.util.List;
 @SpringBootApplication
 public class AnalyticsToolApplication {
 	private static Logger logger = Logger.getLogger(AnalyticsToolApplication.class);
-	@Autowired
-	private AmzAutoCompleteService amzAutoCompleteService;
+	//@Autowired
+	//private AmzAutoCompleteService amzAutoCompleteService;
 	@Autowired
 	private AmzCategoryMapService categoryMapService;
 

@@ -18,6 +18,7 @@ import java.util.*;
 public class AmzCategoryMapService {
     @Autowired
     private AmzCategoryService categoryService;
+
     private Map<String,AmzBrowseNode> topNodes = new HashMap<>();
     private Set<String> duplicateSet = new HashSet<>();
 
