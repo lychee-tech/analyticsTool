@@ -22,19 +22,15 @@ public class AmzCategoryEntity {
     )
     @JoinTable(
             name="amz_category_parent_child",
-            joinColumns=@JoinColumn(name="parent_browseId")
+            joinColumns=@JoinColumn(name="parent_browseId"),
+            inverseJoinColumns = @JoinColumn(name = "child_browseId")
+
     )
     private Set<AmzCategoryEntity> children = new HashSet<>();
 
 
-    @ManyToMany(
-            targetEntity=AmzCategoryEntity.class,
-            cascade={CascadeType.ALL}
-    )
-    @JoinTable(
-            name="amz_category_parent_child",
-            joinColumns=@JoinColumn(name="child_browseId")
-    )
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "children")
     private Set<AmzCategoryEntity> parents = new HashSet<>();
 
     public String getBrowseId() {

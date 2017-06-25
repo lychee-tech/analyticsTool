@@ -57,6 +57,12 @@
 
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.leechi</groupId>
 			<artifactId>ECommerceVendorSDK</artifactId>
 			<version>${ecommerceSdk-version}</version>
