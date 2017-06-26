@@ -33,4 +33,9 @@ public class AmzCategoryServiceTest {
         assertNotNull(entity);
         assertEquals(entity.getChildren().size(), children.size());
     }
+
+    @Test
+    public void testErrorShouldBeLogged() {
+        categoryService.saveCategoryAndChildren("-1");
+    }
 }
