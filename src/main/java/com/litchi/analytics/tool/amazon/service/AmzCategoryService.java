@@ -26,8 +26,12 @@ public class AmzCategoryService {
     public List<AmzBrowseNode> saveCategoryAndChildren(String browseNodeId){
         List<AmzBrowseNode> children = new ArrayList<>();
         sleepInSeconds(10);
+
+        //this line will populate children
         AmzBrowseNode node = BrowseNodeHelp.getBrowseNode(browseNodeId, children);
-        saveCategoryAndChildrenRelationShip(node, children);
+        if (node != null) {
+            saveCategoryAndChildrenRelationShip(node, children);
+        }
         return children;
     }
 
@@ -48,7 +52,6 @@ public class AmzCategoryService {
         }
 
         categoryRepo.save(parent);
-
     }
 
     private void sleepInSeconds(int n){
