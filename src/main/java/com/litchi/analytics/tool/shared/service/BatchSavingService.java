@@ -2,9 +2,8 @@ package com.litchi.analytics.tool.shared.service;
 
 
 import com.litchi.analytics.tool.utl.ListUtl;
-import org.apache.logging.log4j.LogManager;
-
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,7 +21,7 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BatchSavingService<T,ID extends Serializable> {
-    private static Logger logger = LogManager.getLogger(BatchSavingService.class);
+    private static Logger logger = LoggerFactory.getLogger(BatchSavingService.class);
     private static int batchSize =500;
     @Autowired
     private CrudRepository<T,ID> repo;

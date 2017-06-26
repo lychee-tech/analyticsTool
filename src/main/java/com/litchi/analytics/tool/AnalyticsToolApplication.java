@@ -3,8 +3,8 @@ package com.litchi.analytics.tool;
 import com.litchi.analytics.tool.amazon.entity.AmzKeywordEntity;
 import com.litchi.analytics.tool.amazon.service.AmzAutoCompleteService;
 import com.litchi.analytics.tool.amazon.service.AmzCategoryMapService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class AnalyticsToolApplication {
-	private static Logger logger = LogManager.getLogger(AnalyticsToolApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(AnalyticsToolApplication.class);
 	@Autowired
 	private AmzAutoCompleteService amzAutoCompleteService;
 	@Autowired
@@ -37,10 +37,10 @@ public class AnalyticsToolApplication {
 	private void start() {
 		List<AmzKeywordEntity> result = new ArrayList<>();
 		try {
-			amzAutoCompleteService.SearchKeyword("", result,Long.MAX_VALUE);
+			amzAutoCompleteService.SearchKeyword("", result, Long.MAX_VALUE);
 			//categoryMapService.buildCategoryRelationMap();
 		}catch (Exception ex) {
-			logger.error("failed in AmzAutoCompleteService",ex);
+			logger.info("failed in AmzAutoCompleteService",ex);
 		}
 	}
 }

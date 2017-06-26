@@ -2,8 +2,8 @@ package com.litchi.analytics.tool.amazon.service;
 
 import com.litchi.analytics.tool.amazon.help.AmzTopBrowsNodeHelp;
 import com.litchi.analytics.tool.amazon.model.AmzBrowseNode;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.*;
  */
 @Service
 public class AmzCategoryMapService {
-    private static Logger logger = LogManager.getLogger(AmzCategoryMapService.class);
+    private static Logger logger = LoggerFactory.getLogger(AmzCategoryMapService.class);
     @Autowired
     private AmzCategoryService categoryService;
 

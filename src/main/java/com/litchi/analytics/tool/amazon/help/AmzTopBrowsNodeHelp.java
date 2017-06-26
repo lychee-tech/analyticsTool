@@ -3,8 +3,8 @@ package com.litchi.analytics.tool.amazon.help;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.litchi.analytics.tool.amazon.model.AmzBrowseNode;
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AmzTopBrowsNodeHelp {
-    private static Logger logger = LogManager.getLogger(AmzTopBrowsNodeHelp.class);
+    private static Logger logger = LoggerFactory.getLogger(AmzTopBrowsNodeHelp.class);
     private static Map<String, AmzBrowseNode> topNodeDict;
     static {
         try {
