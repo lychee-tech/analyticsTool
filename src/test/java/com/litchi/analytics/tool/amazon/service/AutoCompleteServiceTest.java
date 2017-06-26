@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.doNothing;
 
@@ -35,21 +36,51 @@ public class AutoCompleteServiceTest {
     @Test
     public void aSimpleSearch() throws Exception {
         List<AmzKeywordEntity> keywords = new ArrayList<>();
-        autoCompleteService.SearchKeyword("", keywords,2);
+        autoCompleteService.SearchKeyword("", keywords, 2);
         assertEquals(2, keywords.size());
     }
 
     @Test
-    public void testGetSearchSpaceOfEmptyString(){
-        List<String> space = autoCompleteService.getNextSearchSpace(null);
-        assertEquals(26, space.size());
+    public void getNextInRightInSearchSpace(){
+        String next = autoCompleteService.getNextInSearchSpace("abc",false);
+        assertEquals("abc a", next);
     }
 
     @Test
-    public void testGetSearchSpaceOfOneChar(){
-        List<String> space = autoCompleteService.getNextSearchSpace("a");
-        assertEquals(52, space.size());
+    public void getNextInUpInSearchSpace(){
+        String next = autoCompleteService.getNextInSearchSpace("abc", true);
+        assertEquals("abd", next);
     }
+
+    @Test
+    public void getNextInUpInSearchSpace2(){
+        String next = autoCompleteService.getNextInSearchSpace("abz", true);
+        assertEquals("ac", next);
+    }
+
+    @Test
+    public void getNextInUpInSearchSpace3(){
+        String next = autoCompleteService.getNextInSearchSpace("azz", true);
+        assertEquals("b", next);
+    }
+
+    @Test
+    public void getNextInUpInSearchSpace4(){
+        String next = autoCompleteService.getNextInSearchSpace("zzz", true);
+        assertNull(next);
+    }
+
+    @Test
+    public void getNextInUpInSearchSpace5(){
+        String next = autoCompleteService.getNextInSearchSpace("z a z", true);
+        assertEquals("z aa", next);
+    }
+    @Test
+    public void getNextInUpInSearchSpace6(){
+        String next = autoCompleteService.getNextInSearchSpace("z azz", true);
+        assertEquals("z b", next);
+    }
+
 
     @Test
     public void testSimpleKeywordSearch() throws Exception {

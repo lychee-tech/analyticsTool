@@ -4,10 +4,9 @@ package com.litchi.analytics.tool.amazon.service;
 import com.litchi.analytics.tool.amazon.entity.AmzKeywordEntity;
 import com.litchi.analytics.tool.amazon.help.AutoCompleteHelp;
 import com.litchi.analytics.tool.shared.service.BatchSavingService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,68 +24,66 @@ public class AmzAutoCompleteService {
      * @param result
      */
     public void SearchKeyword(String searchBase, List<AmzKeywordEntity> result, long max) throws Exception {
+        if (StringUtils.isBlank(searchBase)) {
+            searchBase = "a";
+        }
         doSearch(searchBase, result, max);
         batchSavingService.flush(result);
     }
 
 
     private void doSearch(String searchBase, List<AmzKeywordEntity> result, long max) throws Exception {
-        searchBase = searchBase == null? "" : searchBase;
 
-        //found what we need, return
-        if (result.size() >= max) {
-            return;
+       while(searchBase!=null) {
+           List<String> matches = AutoCompleteHelp.getAutoCompleteMatches(searchBase);
+           addMatchedKeywords(searchBase, result, matches, max);
+           batchSavingService.batchSave(result);
+
+
+           if (result.size() >= max) {
+               return;
+           }
+
+           //amazon auto complete returns at most 10 records
+           if(matches.size() >=10) {
+               searchBase = getNextInSearchSpace(searchBase,false);
+           } else {
+               searchBase = getNextInSearchSpace(searchBase, true);
+           }
+       }
+    }
+
+
+    public String getNextInSearchSpace(String searchBase, boolean ignoreRight) {
+        if (! ignoreRight) {
+            return searchBase + " a";
         }
 
-        List<String> searchSpace =null;
+        //else, we should ignore searching right
 
-        if ( searchBase.isEmpty()) {
-           searchSpace = getNextSearchSpace(searchBase);
-
-        } else {
-            List<String> matches = AutoCompleteHelp.getAutoCompleteMatches(searchBase);
-            addMatchedKeywords(searchBase, result, matches, max);
-            batchSavingService.batchSave(result);
-
-            //auto complete returns at most 10 records
-            if (matches.size()>=10) {
-                searchSpace = getNextSearchSpace(searchBase);
-            }
+        //we are done
+        if (StringUtils.equals("z", searchBase)) {
+            return null;
         }
 
 
-        if (searchSpace!=null) {
-            for(String s: searchSpace) {
-                doSearch(s, result, max);
-            }
+        int len = searchBase.length();
+        char lastChar = searchBase.charAt(len - 1);
+
+        if (lastChar ==' ') {
+            return searchBase.substring(0, len-1) + 'a';
+
+        } else if (lastChar =='z') {
+            String sub = searchBase.substring(0, len-1);
+            return getNextInSearchSpace(sub, true);
+
+        } else  {
+            char next  = (char) ((int)lastChar +1);
+            return searchBase.substring(0, len-1) + next;
         }
     }
 
 
-    /**
-     * make it public for testing purpose
-     *
-     * @param keyword
-     * @return
-     */
-    public List<String> getNextSearchSpace(String keyword) {
-        keyword= keyword==null? "": keyword;
-
-        List<String> spaceWithWhitSpace = new ArrayList<String>();
-        List<String> space = new ArrayList<String>();
-
-        for(char c='a';c<='z';c++) {
-            space.add(keyword + c);
-
-            if (! keyword.isEmpty()) {
-                spaceWithWhitSpace.add(keyword+" "+c);
-            }
-        }
-
-        //keep space in alphabetic order
-        spaceWithWhitSpace.addAll(space);
-        return spaceWithWhitSpace;
-    }
 
     /**
      * max is used to limit of keyword, only for testing purpose
