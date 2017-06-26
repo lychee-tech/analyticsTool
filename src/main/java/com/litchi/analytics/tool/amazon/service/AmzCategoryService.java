@@ -4,6 +4,7 @@ import com.litchi.analytics.tool.amazon.entity.AmzCategoryEntity;
 import com.litchi.analytics.tool.amazon.help.BrowseNodeHelp;
 import com.litchi.analytics.tool.amazon.model.AmzBrowseNode;
 import com.litchi.analytics.tool.amazon.repo.AmzCategoryRepo;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 public class AmzCategoryService {
+    private  static Logger logger = Logger.getLogger(AmzCategoryService.class);
     @Autowired
     AmzCategoryRepo categoryRepo;
 
@@ -29,7 +31,10 @@ public class AmzCategoryService {
 
         //this line will populate children
         AmzBrowseNode node = BrowseNodeHelp.getBrowseNode(browseNodeId, children);
-        if (node != null) {
+
+        if (node == null) {
+            logger.error(String.format("amazon return null for browse id %s", browseNodeId));
+        } else {
             saveCategoryAndChildrenRelationShip(node, children);
         }
         return children;
