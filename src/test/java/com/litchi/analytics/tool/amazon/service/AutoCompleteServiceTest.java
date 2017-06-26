@@ -97,7 +97,7 @@ public class AutoCompleteServiceTest {
     @Test
     public void testShortMatches() throws Exception {
         List<AmzKeywordEntity> keywords = new ArrayList<>();
-        autoCompleteService.SearchKeyword("java moss a", keywords,1000);
+        autoCompleteService.SearchKeyword("java moss a", keywords,10);
     }
 
 }

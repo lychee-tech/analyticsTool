@@ -4,7 +4,8 @@ import com.litchi.analytics.tool.amazon.entity.AmzCategoryEntity;
 import com.litchi.analytics.tool.amazon.help.BrowseNodeHelp;
 import com.litchi.analytics.tool.amazon.model.AmzBrowseNode;
 import com.litchi.analytics.tool.amazon.repo.AmzCategoryRepo;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Service
 public class AmzCategoryService {
-    private  static Logger logger = Logger.getLogger(AmzCategoryService.class);
+    private  static Logger logger = LogManager.getLogger(AmzCategoryService.class);
     @Autowired
     AmzCategoryRepo categoryRepo;
 

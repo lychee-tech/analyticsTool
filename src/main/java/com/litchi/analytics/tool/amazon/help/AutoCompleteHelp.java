@@ -3,7 +3,8 @@ package com.litchi.analytics.tool.amazon.help;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -23,7 +24,7 @@ import java.util.List;
  *
  */
 public class AutoCompleteHelp {
-   private static Logger logger = Logger.getLogger(AutoCompleteHelp.class);
+   private static Logger logger = LogManager.getLogger(AutoCompleteHelp.class);
    private static  URLCodec codec = new URLCodec();
    private static Client client =  ClientBuilder.newClient();
    private static String urlTemplate ="http://completion.amazon.com/search/complete?method=completion&q=%s&search-alias=aps&client=amazon-search-ui&mkt=1&x=updateISSCompletion&sc=1&noCacheIE=1294493634389";
