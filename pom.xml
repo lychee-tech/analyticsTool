@@ -100,7 +100,7 @@
 		<repository>
 			<id>github</id>
 			<name> github </name>
-			<url>https://github.com/wenhao888/MavenRepo</url>
+			<url>https://github.com/wenhao888/MavenRepo/raw/master</url>
 		</repository>
 	</repositories>
 
