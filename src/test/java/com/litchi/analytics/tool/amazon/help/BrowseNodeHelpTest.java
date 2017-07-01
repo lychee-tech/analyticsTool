@@ -18,4 +18,12 @@ public class BrowseNodeHelpTest {
         assertEquals("172282", node.getBrowseId());
         assertTrue(children.size()>0);
     }
+
+    @Test
+    public void testTwoBrowseNodeWithTheSameName(){
+        List<AmzBrowseNode> children = new ArrayList<>();
+        AmzBrowseNode node = BrowseNodeHelp.getBrowseNode("15720661", children);
+        children.clear();
+        node = BrowseNodeHelp.getBrowseNode("15721251", children);
+    }
 }

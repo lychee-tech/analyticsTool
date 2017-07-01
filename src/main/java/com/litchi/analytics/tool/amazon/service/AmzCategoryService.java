@@ -31,13 +31,18 @@ public class AmzCategoryService {
         sleepInSeconds(10);
 
         //this line will populate children
-        AmzBrowseNode node = BrowseNodeHelp.getBrowseNode(browseNodeId, children);
+        try {
+            AmzBrowseNode node = BrowseNodeHelp.getBrowseNode(browseNodeId, children);
+            if (node == null) {
+                throw new Exception(String.format("amazon return null for BrowseNode %s", browseNodeId));
+            }
 
-        if (node == null) {
-            logger.error(String.format("amazon return null for browse id %s", browseNodeId));
-        } else {
             saveCategoryAndChildrenRelationShip(node, children);
+
+        } catch (Exception ex){
+            logger.error(String.format("failed to retrieve  BrowseNode %s from amazon", browseNodeId), ex);
         }
+
         return children;
     }
 
