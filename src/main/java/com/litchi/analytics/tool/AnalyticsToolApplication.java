@@ -39,6 +39,7 @@ public class AnalyticsToolApplication {
 		try {
 			//amzAutoCompleteService.SearchKeyword("", result, Long.MAX_VALUE);
 			categoryMapService.buildCategoryRelationMap();
+			logger.info("AnalyticsToolApplication has finished successfully");
 		}catch (Exception ex) {
 			logger.info("failed in AmzAutoCompleteService",ex);
 		}
