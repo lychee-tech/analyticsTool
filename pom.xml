@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.litchi.analytics</groupId>
+	<groupId>com.lychee.analytics</groupId>
 	<artifactId>anayticsTool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<start-class>com.litchi.analytics.tool.AnalyticsToolApplication</start-class>
+		<start-class>com.lychee.analytics.tool.AnalyticsToolApplication</start-class>
 		<java.version>1.8</java.version>
 		<ecommerceSdk-version>4.0</ecommerceSdk-version>
 	</properties>
