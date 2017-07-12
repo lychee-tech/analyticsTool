@@ -37,8 +37,8 @@ public class AnalyticsToolApplication {
 	private void start() {
 		List<AmzKeywordEntity> result = new ArrayList<>();
 		try {
-			String last="beethoven symphonies b";
-			amzAutoCompleteService.SearchKeyword(last, result, Long.MAX_VALUE);
+			String search="bernat sp";
+			amzAutoCompleteService.SearchKeyword(search, result, Long.MAX_VALUE);
 			//categoryMapService.buildCategoryRelationMap();
 			logger.info("AnalyticsToolApplication has finished successfully");
 		}catch (Exception ex) {
