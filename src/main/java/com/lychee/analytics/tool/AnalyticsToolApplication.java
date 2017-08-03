@@ -37,7 +37,7 @@ public class AnalyticsToolApplication {
 	private void start() {
 		List<AmzKeywordEntity> result = new ArrayList<>();
 		try {
-			String search="cc cam";
+			String search="clear go";
 			amzAutoCompleteService.SearchKeyword(search, result, Long.MAX_VALUE);
 			//categoryMapService.buildCategoryRelationMap();
 			logger.info("AnalyticsToolApplication has finished successfully");
